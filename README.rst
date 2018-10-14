@@ -24,10 +24,12 @@ trips.py
 --------
 
 For generating new trips on each episode.
+
 sumoEnvQ.py
 -----------
 
 For creating the proper environment class with reset() and step() methods.
+
 rlearning.py
 ------------
 
