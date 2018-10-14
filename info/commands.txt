@@ -1,8 +1,0 @@
-copy-to-localFolder randomTrips.py
-copy-to-localFolder typemap.xml
-create-in-localFOld trone.sumo.cfg
-
-$ netconvert --osm-files trone.osm -o trone.net.xml
-$ polyconvert --net-file trone.net.xml --osm-files trone.osm --type-file typemap.xml -o trone.poly.xml
-$ python randomTrips.py -n trone.net.xml -r trone.rou.xml -b 0 -e 600 -p 1 -l --weights-prefix trone  --trip-attributes=departSpeed=\"max\"
-$ sumo-gui -c trone.sumo.cfg
