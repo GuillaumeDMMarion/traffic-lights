@@ -147,7 +147,8 @@ class SumoEnv(gym.Env):
 		for v_id in v_ids:
 			self.waiting_dic[v_id] = v_waits_dic[v_id]
 
-	def stopUpdate(self, phases=[0,2,4,6], increment=True): 
+	def stopUpdate(self, phases=[0,2,4,6], increment=True):
+	# ???????????????????????????????? SHOULD WE ADD SPEED PARAM TO CHECK FOR STOP - IN ORDER TO AVOID ACCOUNTING FOR A STOP IF JUST ARRIVING AT TLS ???????
 		'''
 		Returns:
 			None; Updates the number of times each vehicle has stopped at the crossing.
