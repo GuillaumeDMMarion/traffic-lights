@@ -28,7 +28,7 @@ For generating new trips on each episode.
 sumoEnvQ.py
 -----------
 
-For creating the proper environment class with reset() and step() methods.
+For creating the environment class with reset() and step() methods.
 
 rlearning.py
 ------------
