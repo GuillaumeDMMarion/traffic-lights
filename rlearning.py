@@ -34,7 +34,7 @@ dqn.compile(Adam(lr=1e-3), metrics=['mae'])
 # Fit
 env.binary = "sumo"
 env.config = "trone-slow.sumo.cfg"
-dqn.fit(env, nb_steps=50000, verbose=2)
+dqn.fit(env, nb_steps=100000, verbose=2)
 
 # Test
 env.binary = "sumo-gui"

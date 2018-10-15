@@ -148,15 +148,16 @@ class SumoEnv(gym.Env):
 			self.waiting_dic[v_id] = v_waits_dic[v_id]
 
 	def stopUpdate(self, phases=[0,2,4,6], increment=True):
-	# ???????????????????????????????? SHOULD WE ADD SPEED PARAM TO CHECK FOR STOP - IN ORDER TO AVOID ACCOUNTING FOR A STOP IF JUST ARRIVING AT TLS ???????
 		'''
 		Returns:
 			None; Updates the number of times each vehicle has stopped at the crossing.
 		'''
 		# Get all the id's of the vehicles which are in the specified lane at the crossing.
 		v_ids = self.getIds(phases=phases)
+		#stop_ids = [v_id for v_id in v_ids if traci.vehicle.getSpeed(v_id)<5] # So that we don't account a stop for vehicles entering the lane just when the light hits yellow.
+		stop_ids = v_ids
 		# Update dictionary.
-		for v_id in v_ids:
+		for v_id in stop_ids: #instead of: v_ids
 			try:
 				self.stops_dic[v_id] = (self.stops_dic[v_id] + 1) if increment else (max(self.stops_dic[v_id],1))
 			except KeyError:
@@ -256,24 +257,25 @@ class SumoEnv(gym.Env):
 		return observation, reward, done, {}
 
 	def reset(self):
-		# Print overall episode's accumulated waiting time
+		# Print overall episode's accumulated waiting time.
 		print("-------------------------------------")
 		print(round(sum(self.waiting_dic.values()),1))
 		print("-------------------------------------")
-		# Reset tracker for reward
+		# Reset trackers for reward.
 		self.waiting_dic = {}
-		# Try to close connection
+		self.stops_dic = {}
+		# Try to close connection.
 		try:
 			traci.close()
 			sys.stdout.flush()
 		except:
 			pass
-		# Delete/Generate trips
-		### delete()
-		### generate()
-		# Start connection
+		# Delete and Generate trips.
+		###delete()
+		###generate()
+		# Start connection.
 		sumoBinary = checkBinary(self.binary) # sumo-gui
 		traci.start([sumoBinary, "-c", self.config])
-		# Observation at start
+		# Return starting observation.
 		observation = self.low
 		return observation
