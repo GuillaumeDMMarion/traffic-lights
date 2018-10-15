@@ -23,14 +23,14 @@ A number of scripts are needed to achieve the desired reinforcement learning:
 trips.py
 --------
 
-For generating new trips on each episode.
+For generating new trips with random source/destination weights on each episode.
 
 sumoEnvQ.py
 -----------
 
-For creating the environment class with reset() and step() methods.
+For providing the environment class with reset() and step() methods.
 
 rlearning.py
 ------------
 
-For initiating the reinforcement learning through Keras+Tensorflow and eventually testing the results.
+For instantiation of the class and for initiating the reinforcement learning through Keras+Tensorflow and eventually vizualizing the results.
