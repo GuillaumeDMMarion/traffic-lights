@@ -80,25 +80,26 @@ class SumoEnv(gym.Env):
 															2:0,
 															4:2,
 															6:4}
-		self.lanes_dic = {0:["523773486.24.12_0","523773486.24.12_1","-14362916#1_0"], # The lanes which has traffic flowing, for each phase.
+		self.lanes_dic = {0:["523773486.24.12_0","523773486.24.12_1","-14362916#1_0"], # The lanes which have traffic flowing, for each phase.
 										  2:["523773486.24.12_2"										,"-14362916#1_1"],
 										  4:["-524150338_0","510492454#0_0"],
 										  6:["-524150338_1","510492454#0_1"]}
 		self.tl_id = "26085303" # The id of the traffic-light system.
 
-		# Step tracker.
+		# Define learning trackers.
 		self.lstep = 0 # Learning step
 		self.sstep = 0 # SUMO simulation step
+		self.twaiting = [] # Total accumulated waiting for each episode.
 
-		# Define tracker for reward
+		# Define tracker for reward.
 		self.waiting_dic = {}
 		self.stops_dic = {}
 
-		# Define default sumo method
+		# Define default sumo method.
 		self.binary = "sumo" # We default on the command line for increased simulation speed. It can then be overwritten in the reinforcement learning script to vizualize the dqn.test().
 
-		# Define default config file
-		self.config = "trone.sumo.cfg" # This way, for example, one .cfg file can be set up with a high time-step for quick learning and one .cfg can be set up with low time-step for smooth vizualization.
+		# Define default config file.
+		self.config = "trone-slow.sumo.cfg" # This way, for example, one .cfg file can be set up with a high time-step for quick learning and one .cfg can be set up with low time-step for smooth vizualization.
 
 		# Seed
 		self.seed()
@@ -248,6 +249,10 @@ class SumoEnv(gym.Env):
 				row += 1
 		# Done
 		done = traci.simulation.getMinExpectedNumber()==0
+		if done:
+			# Store overall episode's accumulated waiting time.
+			total_episode_waiting = round(sum(self.waiting_dic.values()),1)
+			self.twaiting.append(total_episode_waiting)
 		# Observation box
 		observation = np.append(next_phase_index_arr, metrics, axis=1)
 		# Print info inbetween SUMO output.
@@ -256,11 +261,12 @@ class SumoEnv(gym.Env):
 		# Return
 		return observation, reward, done, {}
 
+	def cycle(self, action=0):
+		done = False
+		while not(done):
+			obs, reward, done, _ = self.step(action)
+
 	def reset(self):
-		# Print overall episode's accumulated waiting time.
-		print("-------------------------------------")
-		print(round(sum(self.waiting_dic.values()),1))
-		print("-------------------------------------")
 		# Reset trackers for reward.
 		self.waiting_dic = {}
 		self.stops_dic = {}
@@ -271,8 +277,8 @@ class SumoEnv(gym.Env):
 		except:
 			pass
 		# Delete and Generate trips.
-		#delete()
-		#generate()
+		delete()
+		generate()
 		# Start connection.
 		sumoBinary = checkBinary(self.binary) # sumo-gui
 		traci.start([sumoBinary, "-c", self.config])

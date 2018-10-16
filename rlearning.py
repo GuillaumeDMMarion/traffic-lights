@@ -42,4 +42,4 @@ env.config = "trone-slow.sumo.cfg"
 dqn.test(env, nb_episodes=100, visualize=False)
 
 # Delete files
-#delete()
+delete()

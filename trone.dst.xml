@@ -1,0 +1,14 @@
+
+	<edgedata>
+		<interval begin="0" end="600"/>
+			<edge id="-231940830#1" value="0.06666666666666667"/> <!--trone:to centre-->
+			<edge id="14362915" value="0.1"/> <!--street to EC-->
+			<edge id="16233798#1" value="0.16666666666666666"/> <!--sceptre:to jourdan-->
+			<edge id="8382447#1" value="0.13333333333333333"/> <!--trone:to etterbeek-->
+			<edge id="524151750" value="0.0"/> <!--wery-->
+			<edge id="-450925440#0" value="0.2"/> <!--henriette-->
+			<edge id="-17670100" value="0.0"/> <!--malibran:to flagey-->
+			<edge id="4730637#0" value="0.13333333333333333"/> <!--soucis-->
+			<edge id="510492456" value="0.2"/> <!--goffart-->
+		</interval>
+	</edgedata>

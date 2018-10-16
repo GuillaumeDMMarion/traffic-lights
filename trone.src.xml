@@ -1,0 +1,10 @@
+
+	<edgedata>
+		<interval begin="0" end="600"/>
+			<edge id="231940830#1" value="0.2"/> <!--trone:from centre-->
+			<edge id="-16233798#1" value="0.22857142857142856"/> <!--sceptre:from jourdan-->
+			<edge id="-8382447#1" value="0.14285714285714285"/> <!--trone:from etterbeek-->
+			<edge id="450925440#0" value="0.22857142857142856"/> <!--henriette-->
+			<edge id="17670100" value="0.2"/> <!--malibran:from flagey-->
+		</interval>
+	</edgedata>
