@@ -9,6 +9,8 @@ from rl.memory import SequentialMemory
 from sumoEnvQ import SumoEnv
 from trips import delete
 
+import pandas as pd # ----------------------- TO BE DELETED
+
 # Get the environment and extract the number of actions available in the SUMO problem
 env = SumoEnv()
 #np.random.seed(123)
@@ -34,7 +36,10 @@ dqn.compile(Adam(lr=1e-3), metrics=['mae'])
 # Fit
 env.binary = "sumo"
 env.config = "trone-slow.sumo.cfg"
-dqn.fit(env, nb_steps=100000, verbose=2)
+dqn.fit(env, nb_steps=50000, verbose=2)
+
+waits = pd.Series(env.twaiting) # ----------------------- TO BE DELETED
+waits.to_csv("wait_learned.csv", sep=",", index=None) # ----------------------- TO BE DELETED
 
 # Test
 env.binary = "sumo-gui"

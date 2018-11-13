@@ -277,8 +277,8 @@ class SumoEnv(gym.Env):
 		except:
 			pass
 		# Delete and Generate trips.
-		delete()
-		generate()
+		###delete()
+		###generate()
 		# Start connection.
 		sumoBinary = checkBinary(self.binary) # sumo-gui
 		traci.start([sumoBinary, "-c", self.config])
