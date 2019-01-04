@@ -110,3 +110,5 @@ maker/
 model/archive/
 recordings/
 model*.PNG
+.gitignore
+.gitattributes
