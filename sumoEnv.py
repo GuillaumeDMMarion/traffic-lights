@@ -45,7 +45,7 @@ class SumoEnv(Env):
 		At the end_time if given, else when all the routes are depleted.
 	"""
 
-	def __init__(self, obs_center, obs_nrows, obs_length, lanes, tls, phases, binary, config, prefix, src, dst, scale, seed, state=None, verbose=False, end_time=None):
+	def __init__(self, obs_center, obs_nrows, obs_length, lanes, tls, phases, binary, config, prefix, src, dst, scale, seed=None, state=None, verbose=False, end_time=None):
 
 		# Definition of Spaces.
 		self.action_space = spaces.Discrete(len(phases))
@@ -78,13 +78,13 @@ class SumoEnv(Env):
 		# Definition of inter-episode tracker (not to be reset).
 		self.episode = 0
 		
-		# Verbose
+		# Verbose.
 		self.verbose = verbose # Boolean for per-step console print.
 
-		# Seed
+		# Seed.
 		self.seed(seed, state)
 
-	def seed(self, seed=None, state=None):
+	def seed(self, seed, state):
 		'''
 		Returns:
 			Float of the seed used.
@@ -117,7 +117,7 @@ class SumoEnv(Env):
 	def _relPos(position, obs_length, obs_xmin, obs_ymin):
 		'''
 		Args:
-			position: tuple of x & y coordinates.
+			position: Tuple of x & y coordinates.
 		Returns:
 			Tuple of the relative x & y indices in the position matrix.
 		'''
@@ -131,7 +131,7 @@ class SumoEnv(Env):
 	def getVehicleInfo(self):
 		'''
 		Returns:
-			nd-array of the current vehicles' (within user-defined limits) positions and speeds.
+			Nd-array of the current vehicles' (within user-defined limits) positions and speeds.
 		'''
 		# Get info for matrix-receptacle creation.
 		obs_nrows = obs_ncols = self.obs_nrows
@@ -159,7 +159,7 @@ class SumoEnv(Env):
 	def storePhase(self, phase):
 		'''
 		Returns:
-			Always None;
+			Always None.
 		'''
 		self.phase_hist = [phase]+self.phase_hist[:2]
 
@@ -178,8 +178,8 @@ class SumoEnv(Env):
 	def disutilities(delays, exp=2):
 		'''
 		Args:
-			Delays: list of delays.
-			exp: the exponent of increasing marginal disutility.
+			delays: List of delays.
+			exp: The exponent of increasing marginal disutility.
 		Returns:
 			Float of the disutility of delays.
 		'''
@@ -197,7 +197,7 @@ class SumoEnv(Env):
 	def trackSim(self, sec=3):
 		'''
 		Args:
-			sec: number of seconds to update.
+			sec: Number of seconds to update.
 		Returns:
 			Performs the update over the given interval.
 			A dictionary of updated info.
@@ -230,7 +230,7 @@ class SumoEnv(Env):
 	def step(self, action, observe=True):
 		'''
 		Args:
-			Action: index of the desired phase's id.
+			action: Index of the desired phase's id.
 
 		Returns:
 			observation: Dictionary of the observation space after the action has been taken.
@@ -317,7 +317,7 @@ class SumoEnv(Env):
 	def cycle(self, action_seq=[0]*6+[1]*4+[2]*6+[3]*4):
 		'''
 		Args:
-			Action: List of the sequence of actions to be taken.
+			action_seq: List of the sequence of actions to be taken.
 		Returns:
 			List of rewards and delays.
 		'''
@@ -339,7 +339,7 @@ class SumoEnv(Env):
 	def reset(self):
 		'''
 		Returns:
-			nd.array of starting observations.
+			Nd.array of starting observation.
 		'''
 		### Increase episode counter.
 		self.episode += 1

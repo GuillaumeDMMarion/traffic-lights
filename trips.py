@@ -13,7 +13,7 @@ from subprocess import DEVNULL, STDOUT, call
 def delete(prefix):
 	'''
 	Args:
-		Prefix: prefix of the files' names.
+		prefix: Prefix of the (to-be-deleted) files' names.
 	Returns:
 		Always None; Tries to delete the existing source/destination files as well as the trips files.
 	'''
@@ -35,6 +35,11 @@ def delete(prefix):
 
 def generate(prefix, src, dst, rng, scale=(0,0)):
 	'''
+	Args:
+		prefix: Prefix of the (to-be-generated) files' names.
+		src: List of the names of the source edges to be used.
+		dst: List of the names of the destination edges to be used.
+		scale: Tuple of 2 std.dev.
 	Returns:
 		Always None; Generates new source/destination files as well as trips files.
 	'''
