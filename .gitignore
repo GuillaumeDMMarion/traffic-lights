@@ -106,4 +106,7 @@ venv.bak/
 # Local stuff
 backup/
 info/
+maker/
+model/archive/
 recordings/
+model*.PNG
