@@ -163,7 +163,7 @@ class SumoEnv(Env):
 		'''
 		self.phase_hist = [phase]+self.phase_hist[:2]
 
-	def delayUpdate(self):
+	def updateDelay(self):
 		'''
 		Returns:
 			Always None; Updates the delay times, for all vehicles currently on the intersection's incoming lanes. 
@@ -186,15 +186,15 @@ class SumoEnv(Env):
 		disutilities = [delay**exp for delay in delays]
 		return disutilities
 
-	def simUpdate(self):
+	def updateSim(self):
 		'''
 		Returns:
 			Always None; Performs a sumo simulation step and updates the delay dictionary.
 		'''
 		traci.simulationStep()
-		self.delayUpdate()
+		self.updateDelay()
 
-	def simTrack(self, sec=3):
+	def trackSim(self, sec=3):
 		'''
 		Args:
 			sec: number of seconds to update.
@@ -208,7 +208,7 @@ class SumoEnv(Env):
 		# Perform the update over the interval.
 		target_elapsed = self._elapsedTime()+sec
 		while self._elapsedTime() < target_elapsed:
-			self.simUpdate()
+			self.updateSim()
 			updated_phase = traci.trafficlight.getPhase(self.tls)
 		# Record info post-update.
 		updated_delay = sum(self.delay.values())
@@ -247,7 +247,7 @@ class SumoEnv(Env):
 		### (Though it is practically impossible considering the 3600s default duration of non-yellow phases.)
 		### If so, we step out of it, into the next non-yellow, i.e. adaptable, phase. This results in supplementary delay not accounted for.
 		while (current_phase not in self.phases.keys()):
-			self.simUpdate()
+			self.updateSim()
 			current_phase = traci.trafficlight.getPhase(self.tls)
 
 		### Simulation progress depending on action taken.
@@ -259,7 +259,7 @@ class SumoEnv(Env):
 			next_phase = desired_phase
 
 		### Simulation progress for reward calculations.
-		sim_info = self.simTrack(sec=3)
+		sim_info = self.trackSim(sec=3)
 		reward = sim_info['added_disutility']
 		updated_phase = traci.trafficlight.getPhase(self.tls)
 
@@ -297,7 +297,7 @@ class SumoEnv(Env):
 			observation = {'phase':None, 'vehicle':None}
 
 		### Final reward tweaks.
-		# Decrease reward if no consecutive two phases were the same in the last 3 phases (to avoid useless phase changes).
+		# Decrease reward if no consecutive two phases were the same in the last 3 phases (to discourage useless phase changes).
 		two_consecutive_same_phases = any([np.all(item==next_item) for item,next_item in zip(self.phase_hist[0:-1], self.phase_hist[1:])])
 		penalty = not(two_consecutive_same_phases)
 		reward -= penalty*10000
