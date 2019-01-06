@@ -25,12 +25,24 @@ trips.py
 
 For generating new trips with random source/destination weights on each episode.
 
-sumoEnvQ.py
+sumoEnv.py
 -----------
 
 For providing the environment class with reset() and step() methods.
 
-rlearning.py
+sumoDqn.py
 ------------
 
-For instantiation of the class and for initiating the reinforcement learning through Keras+Tensorflow and eventually vizualizing the results.
+For instantiation of the class and for initiating the reinforcement learning through Keras+Tensorflow.
+
+sumoDqnTest.py
+------------
+
+For testing the saved models.
+
+sumoNaive.py
+------------
+
+For testing naive phase programse, i.e. fixed duration strategies.
+
+
