@@ -43,6 +43,6 @@ For testing the saved models.
 sumoNaive.py
 ------------
 
-For testing naive phase programse, i.e. fixed duration strategies.
+For testing naive strategies, i.e. fixed phase-duration programs.
 
 
