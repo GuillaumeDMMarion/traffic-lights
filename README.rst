@@ -38,7 +38,7 @@ An environment class handling the simulation advancement, observation parsing an
 sumoDqn.py
 ------------
 
-Script for initiating the sumo environment and training reinforcement learning through Keras and Tensorflow.
+Script for initiating the sumo environment and training the reinforcement learning model through Keras and Tensorflow.
 
 sumoDqnTest.py
 ------------
