@@ -99,9 +99,9 @@ except OSError:
 
 	### Model info.
 	print(model.summary())
-	plot_model(model_phase, to_file='model/model_phase.png', show_layer_names=True, show_shapes=True) # expand_nested=True, dpi=96
-	plot_model(model_vehicle, to_file='model/model_vehicle.png', show_layer_names=True, show_shapes=True) # expand_nested=True, dpi=96
-	plot_model(model, to_file='model/model.png', show_layer_names=True, show_shapes=True) # expand_nested=True, dpi=96
+	plot_model(model_phase, to_file='images/model_phase.png', show_layer_names=True, show_shapes=True) # expand_nested=True, dpi=96
+	plot_model(model_vehicle, to_file='images/model_vehicle.png', show_layer_names=True, show_shapes=True) # expand_nested=True, dpi=96
+	plot_model(model, to_file='images/model.png', show_layer_names=True, show_shapes=True) # expand_nested=True, dpi=96
 
 ### Policy, Memory & Agent set-up.
 # Use a linearly decreasing epsilon-greedy policy, i.e. start with high exploration and gradually move to exploitation.
