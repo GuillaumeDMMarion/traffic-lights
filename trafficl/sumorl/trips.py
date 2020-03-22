@@ -18,7 +18,7 @@ def delete(prefix):
 		Always None; Tries to delete the existing source/destination files as well as the trips files.
 	'''
 	# Fetch working directory.
-	working_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+	working_dir = os.getcwd() #os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 	try:
 		# The scr and dst values
 		call("del "+prefix+".src.xml", shell=True, cwd=working_dir, stdout=DEVNULL, stderr=STDOUT)
@@ -44,7 +44,7 @@ def generate(prefix, src, dst, rng, scale=(0,0)):
 		Always None; Generates new source/destination files as well as trips files.
 	'''
 	# Fetch working directory.
-	working_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+	working_dir = os.getcwd() #os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 	# SRC & DST GENERATION
 	a = rng.normal(loc=100, scale=scale[0], size=len(src))
 	a = a/a.sum()
@@ -72,5 +72,5 @@ def generate(prefix, src, dst, rng, scale=(0,0)):
 	# -b: beginning period of route creation in seconds.
 	# -e: ending period of route creation in seconds.
 	# -p: creation of a route from -b to -e every -p periods.
-	command = "python randomTrips.py -n "+prefix+".net.xml -a vtype.cfg -r "+prefix+".rou.xml -b 0 -e 3600 -p 1.5 -s "+str(rng.randint(0,1e6))+" -l --weights-prefix "+prefix+"  --trip-attributes departSpeed=\'max\' --trip-attributes type=\'base\'"
+	command = "python trafficl/sumorl/randomTrips.py -n "+prefix+".net.xml -a vtype.cfg -r "+prefix+".rou.xml -b 0 -e 3600 -p 1.5 -s "+str(rng.randint(0,1e6))+" -l --weights-prefix "+prefix+"  --trip-attributes departSpeed=\'max\' --trip-attributes type=\'base\'"
 	call(command, shell=True, cwd=working_dir, stdout=DEVNULL, stderr=STDOUT)

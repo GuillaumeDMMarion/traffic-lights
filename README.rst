@@ -18,31 +18,36 @@ Main Dependencies
 Functionalities
 ===============
 
-A number of scripts are needed to achieve the desired reinforcement learning:
+A number of python files are needed to train and test the desired deep reinforcement learning:
 
-trips.py
---------
+trafficl.rlc
+------------
 
-For generating new trips with random source/destination weights on each episode.
+A collection of customized keras-rl objects for handling multimodel neural networks.
 
-sumoEnv.py
------------
+trafficl.sumorl.trips.py
+------------------------
 
-For providing the environment class with reset() and step() methods.
+A couple of objects for deleting and generating new trips with random source/destination weights on each episode.
+
+trafficl.sumorl.sumoEnv.py
+--------------------------
+
+An environment class handling the simulation advancement, observation parsing and reward calculation.
 
 sumoDqn.py
 ------------
 
-For instantiation of the class and for initiating the reinforcement learning through Keras+Tensorflow.
+Script for initiating the sumo environment and training reinforcement learning through Keras and Tensorflow.
 
 sumoDqnTest.py
 ------------
 
-For testing the saved models.
+Script for testing the saved model(s), by default through the sumo-gui.
 
 sumoNaive.py
 ------------
 
-For testing naive strategies, i.e. fixed phase-duration programs.
+Script for testing naive strategies, i.e. fixed phase-duration programs.
 
 

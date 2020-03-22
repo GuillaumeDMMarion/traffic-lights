@@ -7,14 +7,15 @@ from keras.layers import Input, Flatten, LeakyReLU, Conv2D, MaxPooling2D, Activa
 from keras.optimizers import Adam
 from keras.utils import plot_model
 
-from rl_.dqn import DQNAgent # Local import for dictionary compatibility (see line 322). #from rl.agents.dqn import DQNAgent 
-from rl_.callbacks import TrainEpisodeLogger # Local import with addition for on-episode-end model checkpoint and .csv file export (see lines 105:276). #from rl.callbacks import TrainEpisodeLogger 
 from rl.policy import LinearAnnealedPolicy, EpsGreedyQPolicy
 from rl.memory import SequentialMemory
-from rl_.multiInputProcessor import MultiInputProcessor # Local import for dictionary compatibility (see all lines). #from rl.processors import MultiInputProcessor 
 
-from sumoEnv import SumoEnv
-from trips import delete
+from trafficl.rlc.dqn import DQNAgent # Local import for dictionary compatibility (see line 322). #from rl.agents.dqn import DQNAgent 
+from trafficl.rlc.callbacks import TrainEpisodeLogger # Local import with addition for on-episode-end model checkpoint and .csv file export (see lines 105:276). #from rl.callbacks import TrainEpisodeLogger 
+from trafficl.rlc.multiInputProcessor import MultiInputProcessor # Local import for dictionary compatibility (see all lines). #from rl.processors import MultiInputProcessor 
+
+from trafficl.sumorl.sumoEnv import SumoEnv
+from trafficl.sumorl.trips import delete
 
 
 
@@ -98,9 +99,9 @@ except OSError:
 
 	### Model info.
 	print(model.summary())
-	plot_model(model_phase, to_file='model_phase.png', show_layer_names=True, show_shapes=True) # expand_nested=True, dpi=96
-	plot_model(model_vehicle, to_file='model_vehicle.png', show_layer_names=True, show_shapes=True) # expand_nested=True, dpi=96
-	plot_model(model, to_file='model.png', show_layer_names=True, show_shapes=True) # expand_nested=True, dpi=96
+	plot_model(model_phase, to_file='model/model_phase.png', show_layer_names=True, show_shapes=True) # expand_nested=True, dpi=96
+	plot_model(model_vehicle, to_file='model/model_vehicle.png', show_layer_names=True, show_shapes=True) # expand_nested=True, dpi=96
+	plot_model(model, to_file='model/model.png', show_layer_names=True, show_shapes=True) # expand_nested=True, dpi=96
 
 ### Policy, Memory & Agent set-up.
 # Use a linearly decreasing epsilon-greedy policy, i.e. start with high exploration and gradually move to exploitation.
@@ -129,17 +130,3 @@ delete(prefix='trone')
 
 ### Print rng state.
 print(env.rng.get_state())
-
-### Shut down
-'''
-import os
-import time
-t=0
-t_end = 50
-while t<t_end:
-	print(t)
-	time.sleep(1)
-	t+=1
-	if t==t_end-1:
-		os.system('shutdown -s')
-'''

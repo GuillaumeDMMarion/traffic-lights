@@ -11,7 +11,7 @@ import traci
 from sumolib import checkBinary
 
 # Random trip generator
-from trips import generate, delete
+from trafficl.sumorl.trips import generate, delete
 
 # Misc
 import pandas as pd

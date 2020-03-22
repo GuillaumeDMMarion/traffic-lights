@@ -6,7 +6,7 @@ import numpy as np
 from keras.callbacks import History
 
 
-from rl_.callbacks import ( #Local import for dictionary compatibility (see lines 105:276). #from rl.callbacks import
+from trafficl.rlc.callbacks import ( #Local import for dictionary compatibility (see lines 105:276). #from rl.callbacks import
     CallbackList,
     TestLogger,
     TrainEpisodeLogger,

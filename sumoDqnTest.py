@@ -5,13 +5,14 @@ Deep RL tester (from saved model & weights).
 from keras.models import load_model
 from keras.optimizers import Adam
 
-from rl_.dqn import DQNAgent # Local import for dictionary compatibility (see line 322). #from rl.agents.dqn import DQNAgent 
 from rl.policy import LinearAnnealedPolicy, EpsGreedyQPolicy
 from rl.memory import SequentialMemory
-from rl_.multiInputProcessor import MultiInputProcessor # Local import for dictionary compatibility (see all lines). #from rl.processors import MultiInputProcessor 
 
-from sumoEnv import SumoEnv
-from trips import delete
+from trafficl.rlc.dqn import DQNAgent # Local import for dictionary compatibility (see line 322). #from rl.agents.dqn import DQNAgent 
+from trafficl.rlc.multiInputProcessor import MultiInputProcessor # Local import for dictionary compatibility (see all lines). #from rl.processors import MultiInputProcessor 
+
+from trafficl.sumorl.sumoEnv import SumoEnv
+from trafficl.sumorl.trips import delete
 
 
 
@@ -51,7 +52,7 @@ shape_phase = env.observation_space.spaces['phase'].shape
 shape_vehicle = env.observation_space.spaces['vehicle'].shape
 
 ### Input/Output suffix
-model = load_model("reward_-1019065.0.h5f")
+model = load_model("model/reward_-1019065.0.h5f")
 
 ### Policy, Memory & Agent set-up.
 policy = LinearAnnealedPolicy(EpsGreedyQPolicy(), attr='eps', value_max=1., value_min=.01, value_test=.01, nb_steps=100000)
@@ -64,4 +65,4 @@ dqn.compile(optimizer=Adam(lr=.001))
 hist = dqn.test(env, nb_episodes=20, visualize=False)
 
 # Delete sumo files.
-delete()
+delete(prefix='trone')

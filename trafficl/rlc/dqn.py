@@ -4,7 +4,7 @@ import keras.backend as K
 from keras.models import Model
 from keras.layers import Lambda, Input, Layer, Dense
 
-from rl_.core import Agent #Local import for dictionary compatibility (line 6). #from rl.core import Agent
+from trafficl.rlc.core import Agent #Local import for dictionary compatibility (line 6). #from rl.core import Agent
 from rl.policy import EpsGreedyQPolicy, GreedyQPolicy
 from rl.util import *
 
