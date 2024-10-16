@@ -73,7 +73,7 @@ In terms of general model improvement decisions, these were the most prominent:
 * Framestacking and Conv3D introduction for temporal encoding.
 * Self-attention mechanism on depth and channels.
 
-<img src="images/model_evolution.png" />
+<img src="images/model_evolution.PNG" />
 
 <br>
 
