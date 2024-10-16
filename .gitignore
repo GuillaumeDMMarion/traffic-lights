@@ -104,10 +104,22 @@ venv.bak/
 .mypy_cache/
 
 # Local stuff
-backup/
+.gitignore
+.gitattributes
+backup*
+*checkpoint*
+TODO.md
+legacy/
 info/
 maker/
 model/archive/
 recordings/
-.gitignore
-.gitattributes
+*debug*
+*snippets*
+*src.xml
+*dst.xml
+*rou.xml
+*trips.xml
+.ruff_cache
+logs
+*.sumo.cfg

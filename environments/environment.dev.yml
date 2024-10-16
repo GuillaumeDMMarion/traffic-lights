@@ -1,0 +1,16 @@
+name: traffic
+channels:
+  - nvidia
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python
+  - pandas
+  - numpy
+  - pytorch
+  - pytorch-cuda
+  - stable-baselines3
+  - tensorboard
+  - gymnasium
+  # - sumo # install this manually
