@@ -109,6 +109,8 @@ venv.bak/
 backup*
 *checkpoint*
 TODO.md
+sumo/train/[!0]*
+sumo/eval/[!0]*
 legacy/
 info/
 maker/

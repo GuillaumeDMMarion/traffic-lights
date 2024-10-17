@@ -38,15 +38,15 @@ The cars' destinations and origins, defining the general simulation, are randomi
 
 The following snapshots illustrate the parameters pertaining to the road network.
 
-<img src="images/trone-lanes_and_phases.png" width="638" height="436" />
-<img src="images/trone-observation.png" width="638" height="436" />
+<img src="images/trone-lanes_and_phases.png" width="100%" height="auto" style="max-width: 638px; max-height: 436px;" />
+<img src="images/trone-observation.png" width="100%" height="auto" style="max-width: 638px; max-height: 436px;" />
 
 <br>
 For testing the model simply run <code>python -m scripts.rl.test</code>. You can also try your best to beat it running <code>python -m scripts.baseline.human</code>.
 
 The final model acting on the simulation:
 
-<img src="images/example.gif" width="500" height="500" />
+<img src="images/example.gif" width="100%" height="auto" style="max-width: 537px; max-height: 500px;" />
 
 <br>
 The results from the different policies below:
