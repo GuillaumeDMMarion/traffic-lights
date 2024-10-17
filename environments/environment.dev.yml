@@ -5,12 +5,12 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python
-  - pandas
-  - numpy
-  - pytorch
-  - pytorch-cuda
-  - stable-baselines3
-  - tensorboard
-  - gymnasium
+  - python=3.12
+  - pandas=2.2.2
+  - numpy=1.26.4
+  - pytorch=2.4.1
+  - pytorch-cuda=12.4
+  - stable-baselines3=2.3.2
+  - tensorboard=2.17.1
+  - gymnasium=0.29.1
   # - sumo # install this manually
