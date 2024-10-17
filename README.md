@@ -62,7 +62,7 @@ A note on the agent design
 ==========================
 In terms of general model improvement decisions, these were the most prominent:
 * Baseline mlp with multi-input <code>spaces.Dict</code> observations:
-    * <code>(1, n_actions)</code> for the <code>shape</code> observation vs.
+    * <code>(1, n_actions)</code> for the <code>phase</code> observation vs.
     * <code>(1, n_obs, n_obs)</code> for the <code>speed</code>, <code>position</code> and <code>wait</code> matrices.
 * Dropping the <code>position</code> matrix in favor of vehicle absence encoding in the </code> <code>speed</code> and <code>wait</code> matrices (with vehicle absence as -1, and normal values ranging [0, 1]).
 * The inclusion of the <code>accel</code> matrix for a richer representation.
