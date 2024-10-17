@@ -12,10 +12,11 @@
 This repository implements the use of reinforcement learning for controlling traffic light systems.
 While the code is abstracted in order to be applied on different scenarios, a real-life implementation is provided for illustration purposes too.
 <br>Toolkit-wise, <code>stable-baselines3</code> is used in conjunction with the **Simulation of Urban MObility** (SUMO) software for learning on multiple traffic simulations in parallel.
-Some highlights of this implementation:
+Key highlights of this implementation include::
 * Pytorch as backend.
 * Vectorized environments.
-* Playable set-up to get human baselines.
+* Custom feature extractor.
+* Playable setup for obtaining human baselines.
 * Designed for reproducibility to other sumo networks.
 
 <br>(A legacy <code>keras</code> + <code>tensorflow</code> implementation is still available in the aptly named branch.)
@@ -34,7 +35,7 @@ Quickstart for testing the provided use-case
 ============================================
 
 The traffic lights at a 4-way traffic intersection is controlled by a PPO model.
-The cars' destinations and origins, defining the general simulation, are randomized every episode (though we fixed it for the final eval env runs).
+The destinations and origins of the cars, which define the general simulation, are randomized every episode (though we fixed it for the final eval env runs).
 
 The following snapshots illustrate the parameters pertaining to the road network.
 
@@ -53,7 +54,7 @@ The results from the different policies below:
 
 <img src="images/results_graph.png" />
 
-If you'd wish to retrain or investigate how the training was done, check out <code>scripts/rl/train.py</code>.
+If you wish to retrain or explore the training process, check out <code>scripts/rl/train.py</code>.
 
 <br>
 
@@ -64,20 +65,20 @@ In terms of general model improvement decisions, these were the most prominent:
     * <code>(1, n_actions)</code> for the <code>shape</code> observation vs.
     * <code>(1, n_obs, n_obs)</code> for the <code>speed</code>, <code>position</code> and <code>wait</code> matrices.
 * Dropping the <code>position</code> matrix in favor of vehicle absence encoding in the </code> <code>speed</code> and <code>wait</code> matrices (with vehicle absence as -1, and normal values ranging [0, 1]).
-* Inclusion of the <code>accel</code> matrix.
+* The inclusion of the <code>accel</code> matrix for a richer representation.
 * Changing <code>phase</code> encoding to <code>(1, n_obs, n_obs)</code> instead of <code>(1, n_actions)</code>.
 * Introduction of weighted (<code>w2</code>) unshaped long-term reward, balanced against the weighted (<code>w1</code>) shaped myopic reward.
-* Moving from the above fixed <code>w1</code>/<code>w2</code> balance, to a curriculum approach for faster convergence.
-* Multi-input cnn treating each matrix seperately (though with the same conv block).
+* Transitioning from the above fixed <code>w1</code>/<code>w2</code> balance, to a curriculum approach for faster convergence.
+* Multi-input cnn treating each matrix separately (though with the same conv block).
 * Single-input cnn with observation types as channels.
-* Framestacking and Conv3D introduction for temporal encoding.
+* Frame-stacking and Conv3D introduction for temporal encoding.
 * Self-attention mechanism on depth and channels.
 
 <img src="images/model_evolution.PNG" />
 
 <br>
 
-Designs not witheld (yet):
+Designs not withheld (yet):
 * Residual blocks
 * (Cross)-attention mechanisms (as we've moved away from the multi-input design)
 
@@ -87,11 +88,11 @@ How to apply to a new use-case:
 * Create a new network and replace the <code>intersection.net.xml</code> file in the /sumo/*/ folders
 * Change the <code>sumo-env.cfg</code> values accordingly (see also the [Quickstart](#quickstart-for-testing-the-provided-use-case) above for some more details), specifically:
     * Find the x- and y-coordinates of your observation window's center (<code>obs_center</code>)
-    * Denote your observation window's precision (<code>obs_length</code>) and size (<code>obs_nrows</code>)
+    * Denote your observation window's precision (<code>obs_length</code>) and its size (<code>obs_nrows</code>)
     * Identify the traffic light id to be controlled (<code>tls_id</code>)
     * List the traffic light's incoming lanes (<code>tls_lanes</code>) and non-yellow phases (<code>tls_phases</code>)
     * List the network's sources (<code>rnd_src</code>) and destinations (<code>rnd_dst</code>)
-* Potentially rename the <code>network</code> and <code>config</code> arguments in the <code>SumoEnv</code> or <code>SumoEnvFactory</code> initialization
+You may also need to rename the <code>network</code> and <code>config</code> arguments in the <code>SumoEnv</code> or <code>SumoEnvFactory</code> initialization
 
 <br>
 
