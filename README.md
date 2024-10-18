@@ -15,7 +15,9 @@ While the code is abstracted in order to be applied on different scenarios, a re
 Key highlights of this implementation include::
 * Pytorch as backend.
 * Vectorized environments.
-* Custom feature extractor.
+* Frame-stacking.
+* Curriculum learning.
+* Custom conv3d feature extractor.
 * Playable setup for obtaining human baselines.
 * Designed for reproducibility to other sumo networks.
 
